@@ -113,6 +113,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/mizani-0.13.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/mkl-2024.2.2-h66d3029_15.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/munkres-1.1.4-pyh9f0ad1d_0.tar.bz2
+      - conda: https://conda.anaconda.org/conda-forge/noarch/narwhals-1.27.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nbclient-0.10.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nbconvert-core-7.16.6-pyh29332c3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nbformat-5.10.4-pyhd8ed1ab_1.conda
@@ -133,6 +134,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/pillow-11.1.0-py313hda88b71_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pkgutil-resolve-name-1.3.10-pyhd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.6-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/plotly-6.0.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/plotnine-0.14.5-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/prometheus_client-0.21.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/prompt-toolkit-3.0.50-pyha770c72_0.conda
@@ -1675,6 +1677,17 @@ packages:
   - pkg:pypi/munkres?source=hash-mapping
   size: 12452
   timestamp: 1600387789153
+- conda: https://conda.anaconda.org/conda-forge/noarch/narwhals-1.27.1-pyhd8ed1ab_0.conda
+  sha256: 2f67917b0bfe4ea8633b1081c77a0e5aa8992d5d1705ddab3a8c1120884c3130
+  md5: 85dc18920c784af64744ecf0ea1b0bdc
+  depends:
+  - python >=3.9
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/narwhals?source=hash-mapping
+  size: 177226
+  timestamp: 1739851799880
 - conda: https://conda.anaconda.org/conda-forge/noarch/nbclient-0.10.2-pyhd8ed1ab_0.conda
   sha256: a20cff739d66c2f89f413e4ba4c6f6b59c50d5c30b5f0d840c13e8c9c2df9135
   md5: 6bb0d77277061742744176ab555b723c
@@ -2004,6 +2017,21 @@ packages:
   - pkg:pypi/platformdirs?source=hash-mapping
   size: 20448
   timestamp: 1733232756001
+- conda: https://conda.anaconda.org/conda-forge/noarch/plotly-6.0.0-pyhd8ed1ab_0.conda
+  sha256: 1b534839e22ef0d59bc35417f2dea3c65e6101a139e5dee008837a5290e4fd34
+  md5: 6297a5427e2f36aaf84e979ba28bfa84
+  depends:
+  - narwhals >=1.15.1
+  - packaging
+  - python >=3.9
+  constrains:
+  - ipywidgets >=7.6
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/plotly?source=hash-mapping
+  size: 5034538
+  timestamp: 1738287950837
 - conda: https://conda.anaconda.org/conda-forge/noarch/plotnine-0.14.5-pyhd8ed1ab_0.conda
   sha256: 94f61f663a08dffc33a71a618e8969925a1c8dec0295947a3a08d7fb8f7b0f88
   md5: 80424bf1d57fec7258f38a54ebf6c4e2
