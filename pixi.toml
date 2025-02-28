@@ -6,6 +6,7 @@ platforms = ["win-64"]
 version = "0.1.0"
 
 [tasks]
+ipynb_to_py = "jupyter nbconvert --to python"
 
 [dependencies]
 python = ">=3.13.2,<3.14"
