@@ -108,7 +108,7 @@ However, since there's some overlap in the transformation from the _versicolor_ 
 ]
 For this case, we decided on concatenating the sepal width/length and petal width/length to make a `Width`/`Lenght` column, and make the target `Sepal_or_Petal` describe if the row was produced from the Sepal or Petal part. A sample of this transformed dataset can be seen on @2b_t.
 
-#figure(image("SP_table.png", height: 20%), caption: [Sepal or Petal dataset sample])<2b_t>
+#figure(image("images/SP_table.png", height: 20%), caption: [Sepal or Petal dataset sample])<2b_t>
 
 After this, a similar process from *2) a)* was done to for the LDA transformation and Kernel Density Estimation. The code for this one can be observed in @2b_code.
 
@@ -132,11 +132,11 @@ For this analysis, we worked with the stockreturns dataset containing 10 columns
 The 2D factor loading plots below visualize how each company relates to the first two factors, revealing which companies tend to move together and which respond differently to the factors.
 
 #figure(
-  image("task3-2D-loading-plot-rotation.png", width: 90%), caption: [ Factor loading plot with varimax rotation ]
+  image("images/task3-2D-loading-plot-rotation.png", width: 90%), caption: [ Factor loading plot with varimax rotation ]
 )
 
 #figure(
-  image("task3-2D-loading-plot-NO-rotation.png", width: 90%), caption: [ Factor loading plot with no rotation ]
+  image("images/task3-2D-loading-plot-NO-rotation.png", width: 90%), caption: [ Factor loading plot with no rotation ]
 )
 
 If we compare the two figures, it's evident that rotation creates a more differentiated structure. The un-rotated solution primarily separates companies along Factor 2, while the rotated solution identifies more distinct groupings that better reflect underlying relationships.
@@ -144,7 +144,7 @@ If we compare the two figures, it's evident that rotation creates a more differe
 The figure below shows a few plots that display the factor scores from the factor analysis with rotation, where each point represents a single trading day positioned according to its scores on each factor. These plots reveal varied market behavior across trading days with no distinct clustering patterns. 
 
 #figure(
-  image("task3-FA-rotation-3-factor-compared.png", width: 80%), caption: [ Factor scores from the factor analysis with rotation ]
+  image("images/task3-FA-rotation-3-factor-compared.png", width: 80%), caption: [ Factor scores from the factor analysis with rotation ]
 )
 
 
@@ -156,13 +156,13 @@ The figure below shows a few plots that display the factor scores from the facto
 Based on Figure 11, SEB and Nordea bank are positioned close together, indicating they have similar factor loadings and patterns of correlation with the underlying factors. 
 
 #figure(
-  image("task3b-3D-text-lables.png", width: 90%), caption: [ Factor loading plot with rotation ]
+  image("images/task3b-3D-text-lables.png", width: 90%), caption: [ Factor loading plot with rotation ]
 )
 
 Figure 12 illustrates a broad distribution of points across all three plots, confirming that each component captures variation in the data. However, the absence of clear linear patterns between any pair of components suggests that the components are relatively independent.
 
 #figure(
-  image("task3b-components.png"), caption: [ Factor scores from the factor analysis with rotation ]
+  image("images/task3b-components.png"), caption: [ Factor scores from the factor analysis with rotation ]
 )
 
 #pagebreak()
@@ -210,7 +210,7 @@ We can see from @4b_figure that, as expected, a bigger level of noise will make 
 From @4b_plot, it seems that the the noise size seem to not affect the IDE as much around $sigma = 0.25$, seemingly being exponentially increasing before that. To investigate the existence of such threshold, even smaller numbers of noise were calculated.
 
 #figure(
-image("4c.png"), caption: [Intrinsic dimensionality estimate over even smaller noise sizes]
+image("images/4c.png"), caption: [Intrinsic dimensionality estimate over even smaller noise sizes]
 )
 
 Using even smaller noise sizes, we can see that the correlation is still present, without any threshold of noise before the increase starts. From this, we can conclude that, although there's a threshold for the IDE to stop increasing, there's no threshold before it starts increasing: the smallest amount of noise will always increase our IDE, making it a reliable metric for noise.
@@ -225,11 +225,11 @@ Using even smaller noise sizes, we can see that the correlation is still present
 ]
 With the elbow method we identified $k = 6$ as the optimal number of components for dimensionality reduction, as shown on Figure 16. Using this information, we then performed Singular Value Decomposition (SVD) and visualized the reduced-dimension data in both 2D and 3D, as shown in Figure 17 and 18.
 
-#figure(image("task5-elbow.png", width: 60%), caption: [Elbow method.])
+#figure(image("images/task5-elbow.png", width: 60%), caption: [Elbow method.])
 
-#figure(image("task5a-2d-SVD.png", width: 70%), caption: [Singular Value Decomposition 2D visualization.])
+#figure(image("images/task5a-2d-SVD.png", width: 70%), caption: [Singular Value Decomposition 2D visualization.])
 
-#figure(image("task5b-3d-SVD.png", width: 70%), caption: [Singular Value Decomposition 3D visualization.])
+#figure(image("images/task5b-3d-SVD.png", width: 70%), caption: [Singular Value Decomposition 3D visualization.])
 
 #question[
   == b) 
@@ -237,8 +237,8 @@ With the elbow method we identified $k = 6$ as the optimal number of components 
 ]
 From the figures below the results of Singular Value Decomposition (SVD) and Principal Component Analysis (PCA) applied to the same leukemia dataset can be compared. Both methods reveal similar distribution patterns with a significant difference in the range of the second component, where for SVD it spans from -13 to 3, and for PCA from -3 to 13. Additionally, the SVD results show a higher concentration of points in the upper half of the plot, while PCA points clustered mostly in the lower half. However, the overall shape and relative positioning of the points somehow appears consistent, indicating that both methods capture similar underlying patterns in the data.
 
-  #figure(image("task5b-PCA-2D.png", width: 60%), caption: [Singular Value Decomposition 3D visualization.])
-  #figure(image("task5a-2d-SVD.png", width: 60%), caption: [Singular Value Decomposition 2D visualization.])
+  #figure(image("images/task5b-PCA-2D.png", width: 60%), caption: [Singular Value Decomposition 3D visualization.])
+  #figure(image("images/task5a-2d-SVD.png", width: 60%), caption: [Singular Value Decomposition 2D visualization.])
 
 #pagebreak()
 
