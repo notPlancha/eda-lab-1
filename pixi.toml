@@ -21,6 +21,8 @@ plotly = ">=6.0.0,<7"
 openpyxl = ">=3.1.5,<4"
 factor-analyzer = ">=0.5.1,<0.6"
 kneed = ">=0.8.5,<0.9"
+typst = ">=0.13.1,<0.14"
 
 [pypi-dependencies]
 pyedakit = ">=0.1.4, <0.2"
+scikit-misc = ">=0.5.1, <0.6"
