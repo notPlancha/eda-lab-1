@@ -7,7 +7,9 @@
 #show figure.where(
   kind: table
 ): set figure.caption(position: top)
-
+// #set page(footer: context (
+//   return align(right)[*Next: #(query(heading.where(level: (counter(heading).get().at(0) + 2))), 0,0).at(0)*]
+// ))
 #let today = datetime.today()
 #align(center)[EDA Lab 1]
 #set text( size: 14pt)
@@ -15,11 +17,10 @@
     André Plancha \ #text(size:7pt)[#link("mailto:andre.plancha@hotmail.com")] \
     Yana Zlatanova \ #text(size:7pt)[#link("mailto:yana-zlatanova-gold@gmail.com")]
   ],align(right)[
-      MALMÖ UNIVERTITY \
+      MALMÖ UNIVERSITY \
       #align(horizon)[MA661E - VT25]
       #align(bottom)[#today.display("[month repr:long] [day], [year]")]
-]
-)
+])
 #v(-6pt)
 #line(length: 100%)
 #set text(size: 12pt, weight: "regular")
@@ -44,6 +45,8 @@
 
 #show table: set align(center)
 
+
+
 #question[
   = 1) 
   Generate n =150, p = 6 normally distributed random variables that have high variance in some dimension and low variance in another dimension. Try PCA using both correlation and covariance matrices.
@@ -51,12 +54,14 @@
 Following the example given, a dataset with 2 dimensions of high variance and a dataset with 4 dimensions of low variance were created and combined into one dataset with $n = 150, p = 6$.
 
 #question[
-  == a) Is the covariance matrix very informative?  
+  == a)
+  Is the covariance matrix very informative?  
 ]
 The covariance matrix PCA is not very informative in our example because it reflects only the variance of the the first 2 dimensions with high-variance and it fails to show the structures in the remaining dimensions. 
 
 #question[
-  == b) *Which one would be better to use in this case?*
+  == b) 
+  Which one would be better to use in this case?
 ]
  In our case correlation matrix would be a better choice because it standardizes all variables to have equal variance before finding principal components.
 
@@ -68,9 +73,8 @@ The covariance matrix PCA is not very informative in our example because it refl
 #figure(
   image("images/PCA_CORR.png", width: 70%), caption: [PCA using correlation matrix ]
 )
-
-
-#question[ 
+#pagebreak()
+#question[
   = 2)
   For each case, apply Linear Discriminant Analysis (LDA) to the `Iris` dataset and visualize the data in one dimension, using the Kernel Density Estimate; and discuss how good the mapping are for each case.
 
@@ -110,16 +114,17 @@ After this, a similar process from *2) a)* was done to for the LDA transformatio
 
 #figure(
   image("images/2b.png"),
+  caption: [LDA of Petals and Sepals]
 )<2b>
 
-As observed in @2b, there's some small overlap between the mappings, which suggests that the direction found by the LDA is somewhat effective. 
-
+As observed in @2b, there's only a small overlap between the mappings, however which suggests that the direction found by the LDA is somewhat effective. 
+#pagebreak()
 #question[
   = 3) 
   *Factory analysis*
   
   == a) 
-  *Repeat example 2.5 for dataset stockreturns.*
+  Repeat example 2.5 for dataset stockreturns.
 ]
 
 For this analysis, we worked with the stockreturns dataset containing 10 columns (companies) and 100 rows (trading days, assumed). We first standardized the data and then applied factor analysis to extract three factors. We implemented the analysis both with varimax rotation and without rotation for comparison.
@@ -160,7 +165,7 @@ Figure 12 illustrates a broad distribution of points across all three plots, con
   image("task3b-components.png"), caption: [ Factor scores from the factor analysis with rotation ]
 )
 
-
+#pagebreak()
 
 #question[
   = 4)
@@ -184,30 +189,39 @@ $ "IDE" approx 1.119 $
   Study the intrinsic dimensionality when introducing noise of various sizes to the curve.
 ]
 
-For this exercise, to introduce noise of various sizes, we decided to generate and add random points to our plot, and record the intrinsic dimensionality every time a new random point was added. The random points were uniformly generated over the minimum and maximum of every dimension of our curve. The code for this process is listed in @4b_code, the curve with the final noise can be observed in @4b_figure, and the Estimate Intrinsic Dimensionality plotted over the number of noise data points added can be observed in @4b_plot
+For this exercise, to introduce noise of various sizes, we decided to, while generating the points from the curve, add a random noise to the point $(x,y,z)$ generated each iteration, so the new noisy point would be equal to $ (x + u_1 * sigma, y + u_2 * sigma, z + u_3 * sigma), u_1,u_2,u_3 ~ U(0,1) $ 
+
+// generate and add random points to our plot, and record the intrinsic dimensionality every time a new random point was added. The random points were uniformly generated over the minimum and maximum of every dimension of our curve. The code for this process is listed in @4b_code, the curve with the final noise can be observed in @4b_figure, and the Estimate Intrinsic Dimensionality plotted over the number of noise data points added can be observed in @4b_plot
 
 #figure(
-  image("images/4b_figure.png", height: 20%), caption: [Curve with noise added]
+  image("images/4b_figure.png", height: 20%), caption: [Curves with noise added]
 )<4b_figure>
-
 #figure(
   image("images/4b plot.png", height: 40%), caption: [Intrinsic Dimensionality over noise size]
 )<4b_plot>
+We can see from @4b_figure that, as expected, a bigger level of noise will make the curve less recognizable, to the point that calling it a curve is even questionable. From @4b_plot, we can see that the intrinsic dimensionality estimate goes up as noise increases, exponentially increasing until around IED = 3, which makes sense since adding a noise factor can be even argued as adding another intrinsic dimension to our curve. The IED increase seems to stabilize around this estimate, around a noise of $sigma approx 0.25$.
 
-For the first $approx 12$ noise data points, the intrinsic Dimensionality seems to be relatively low and going down, suggesting that the dataset has a we--defined structure; until it reaches a somewhat consistent value until $approx 27$, where the values starts increasing rapidly with the number of noise data points added. This suggest that beyond a certain point, as noise increases, the metric also increases, showing how noise disrupts rapidly disrupts the original structure.
+// For the first $approx 12$ noise data points, the intrinsic Dimensionality seems to be relatively low and going down, suggesting that the dataset has a we--defined structure; until it reaches a somewhat consistent value until $approx 27$, where the values starts increasing rapidly with the number of noise data points added. This suggest that beyond a certain point, as noise increases, the metric also increases, showing how noise disrupts rapidly disrupts the original structure.
 
 #question[
   == c)
   Is there any threshold number of noise size for the intrinsic dimensionality estimate?
 ]
+From @4b_plot, it seems that the the noise size seem to not affect the IDE as much around $sigma = 0.25$, seemingly being exponentially increasing before that. To investigate the existence of such threshold, even smaller numbers of noise were calculated.
 
-While it's difficult to define a strict threshold, for this particular curve, a noise level of approximately 40 data points can be considered a reasonable threshold.
+#figure(
+image("4c.png"), caption: [Intrinsic dimensionality estimate over even smaller noise sizes]
+)
+
+Using even smaller noise sizes, we can see that the correlation is still present, without any threshold of noise before the increase starts. From this, we can conclude that, although there's a threshold for the IDE to stop increasing, there's no threshold before it starts increasing: the smallest amount of noise will always increase our IDE, making it a reliable metric for noise.
+
+#pagebreak()
 
 #question[
   = 5)
   
   == a) 
-  Apply the Singular value decomposition (SVD) to dataset Leukemia, choose a proper lower dim $k$ via elbow in the plot of singular vaules, then plot the dimension reduced data in both 2-dim and 3-dim (in case your $k$ is at least three).
+  Apply the Singular value decomposition (SVD) to dataset Leukemia, choose a proper lower dim $k$ via elbow in the plot of singular values, then plot the dimension reduced data in both 2-dim and 3-dim (in case your $k$ is at least three).
 ]
 With the elbow method we identified $k = 6$ as the optimal number of components for dimensionality reduction, as shown on Figure 16. Using this information, we then performed Singular Value Decomposition (SVD) and visualized the reduced-dimension data in both 2D and 3D, as shown in Figure 17 and 18.
 
@@ -219,14 +233,14 @@ With the elbow method we identified $k = 6$ as the optimal number of components 
 
 #question[
   == b) 
-  *Try PCA (covaraince) and compare the results from these two different methods.*
+  Try PCA (covariance) and compare the results from these two different methods.
 ]
 From the figures below the results of Singular Value Decomposition (SVD) and Principal Component Analysis (PCA) applied to the same leukemia dataset can be compared. Both methods reveal similar distribution patterns with a significant difference in the range of the second component, where for SVD it spans from -13 to 3, and for PCA from -3 to 13. Additionally, the SVD results show a higher concentration of points in the upper half of the plot, while PCA points clustered mostly in the lower half. However, the overall shape and relative positioning of the points somehow appears consistent, indicating that both methods capture similar underlying patterns in the data.
 
   #figure(image("task5b-PCA-2D.png", width: 60%), caption: [Singular Value Decomposition 3D visualization.])
   #figure(image("task5a-2d-SVD.png", width: 60%), caption: [Singular Value Decomposition 2D visualization.])
 
-
+#pagebreak()
 
 #question[
   = 6) 
@@ -260,7 +274,15 @@ From the figures, we can see that each shape, excluding the sphere surface, has 
   Using this modified method, study the global and local intrinsic dimensionalities using `PackingNumbers`
 ]
 
-The modified function can be found on @genLDdata_mod and its output can be visualized on @sp_pn, along with the output of the #lid with _PackingNumbers_. The #gid was $approx$ #calc.round(0.6918028005414134, digits:2)
+The modified function can be found on @genLDdata_mod and its output can be visualized on @sp_pn, along with the output of the #lid with _PackingNumbers_. The #gid was $approx$ #calc.round(0.6918028005414134, digits:2).
+
+#figure(table(columns: 2,
+table.header([*Dimension*],[*Count (Packing Numbers)*]),
+  table.hline(),
+  [1], [2934 (73.350%)],
+  [2], [679 (19.975%)],
+  [3], [387 (9.675%)],
+), caption: [Local Intrinsic Dimensionality Counts])<table_lid2>
 
 #figure(
 image("images/Local Intrinsic Dimensionality with _PackingNumbers_.png"), caption: [Local Intrinsic Dimensionality with _PackingNumbers_]
@@ -375,7 +397,7 @@ Z = lda.fit_transform(data_other_way.drop(columns="Sepal_Or_Petal"), data_other_
 === a)
 
 #figure(```python
-stocks_df = pd.read_excel('../data/stockreturns.xlsx')
+stocks_df = pd.read_excel('../data/stockreturns.xlsx', names=list(range(1,11)))
 stocks = stocks_df.values  # convert to numpy array
 
 scaler = StandardScaler()
@@ -498,14 +520,17 @@ plt.show()
 import numpy as np
 import pandas as pd
 import plotly.express as px
-np.random.seed(1)
+def generate_random_numbers_from_these_functions(n = 500, lamb = 0, seed = None):
+  if seed:
+    np.random.seed(seed)
+  theta = np.random.uniform(-2*np.pi, 2*np.pi, n)
+  x = (theta*np.cos(theta))/(1+theta**2) + lamb*np.random.uniform(0, 1, n)
+  y = (theta*np.sin(theta))/(1+theta**2) + lamb*np.random.uniform(0, 1, n)
+  z = theta + lamb*np.random.uniform(0, 1, n)
+  df = pd.DataFrame({'x':x, 'y':y, 'z':z})
+  return df
 
-n = 500
-theta = np.random.uniform(-2*np.pi, 2*np.pi, n)
-x = (theta*np.cos(theta))/(1+theta**2)
-y = (theta*np.sin(theta))/(1+theta**2)
-z = theta
-df = pd.DataFrame({'x':x, 'y':y, 'z':z})
+df = generate_random_numbers_from_these_functions(seed = 1)
 
 fig = px.scatter_3d(df, x='x', y='y', z='z', color='z')
 fig.show()
@@ -518,33 +543,138 @@ id_pettis(df)
 
 === b)
 #figure(```python
-iterations = 100
-n_generated = 100
+noised_df_point01 = generate_random_numbers_from_these_functions(lamb = 0.01, seed = 1)
+noised_df_point05 = generate_random_numbers_from_these_functions(lamb = 0.05, seed = 1)
+noised_df_point1 = generate_random_numbers_from_these_functions(lamb = 0.1, seed = 1)
+noised_df_point5 = generate_random_numbers_from_these_functions(lamb = 0.5, seed = 1)
+noised_df_point1 = generate_random_numbers_from_these_functions(lamb = 1, seed = 1)
 
-noise_list = [[0, id_pettis(df)]]
-df_noised = df.copy()
-np.random.seed(1)
-for i in range(1, iterations):
-  x = np.random.uniform(min_max['x']['min'], min_max['x']['max'], n_generated//iterations)
-  y = np.random.uniform(min_max['y']['min'], min_max['y']['max'], n_generated//iterations)
-  z = np.random.uniform(min_max['z']['min'], min_max['z']['max'], n_generated//iterations)
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
-  df_noised = pd.concat([df_noised, pd.DataFrame({'x': x, 'y': y, 'z': z})], ignore_index=True)
-  noise_list.append([(n_generated//iterations)*i, id_pettis(df_noised)])
-noise_df = pd.DataFrame(noise_list, columns=['n', 'eid'])
+fig = make_subplots(
+    rows=1,
+    cols=5,
+    specs=[
+        [
+            {"type": "scatter3d"},
+            {"type": "scatter3d"},
+            {"type": "scatter3d"},
+            {"type": "scatter3d"},
+            {"type": "scatter3d"},
+        ]
+    ],
+    subplot_titles=(
+        "lamb = 0.01",
+        "lamb = 0.05",
+        "lamb = 0.1",
+        "lamb = 0.5",
+        "lamb = 1",
+    ),
+)
+fig.add_trace(
+    go.Scatter3d(
+        x=noised_df_point01["x"],
+        y=noised_df_point01["y"],
+        z=noised_df_point01["z"],
+        mode="markers",
+        marker=dict(
+            size=2, color=noised_df_point01["z"], colorscale="Viridis"
+        ),
+    ),
+    row=1,
+    col=1,
+)
+fig.add_trace(
+    go.Scatter3d(
+        x=noised_df_point05["x"],
+        y=noised_df_point05["y"],
+        z=noised_df_point05["z"],
+        mode="markers",
+        marker=dict(
+            size=2, color=noised_df_point05["z"], colorscale="Viridis"
+        ),
+    ),
+    row=1,
+    col=2,
+)
+fig.add_trace(
+    go.Scatter3d(
+        x=noised_df_point1["x"],
+        y=noised_df_point1["y"],
+        z=noised_df_point1["z"],
+        mode="markers",
+        marker=dict(size=2, color=noised_df_point1["z"], colorscale="Viridis"),
+    ),
+    row=1,
+    col=3,
+)
+fig.add_trace(
+    go.Scatter3d(
+        x=noised_df_point5["x"],
+        y=noised_df_point5["y"],
+        z=noised_df_point5["z"],
+        mode="markers",
+        marker=dict(size=2, color=noised_df_point5["z"], colorscale="Viridis"),
+    ),
+    row=1,
+    col=4,
+)
+fig.add_trace(
+    go.Scatter3d(
+        x=noised_df_point1["x"],
+        y=noised_df_point1["y"],
+        z=noised_df_point1["z"],
+        mode="markers",
+        marker=dict(size=2, color=noised_df_point1["z"], colorscale="Viridis"),
+    ),
+    row=1,
+    col=5,
+)
 
-fig = px.scatter_3d(df_noised, x='x', y='y', z='z', color='z')
+fig.update_layout(title_text="3D Scatter Plots with Different Noise Levels")
 fig.show()
 
+# make from 0.1 to 2 noised dfs and calculate their eid
+lambdas = np.array(range(1, 100, 1))*0.01
+eids = []
+np.random.seed(1)
+for lamb in lambdas:
+  noised_df = generate_random_numbers_from_these_functions(lamb = lamb)
+  eid = id_pettis(noised_df)
+  eids.append(eid)
+noise_df = pd.DataFrame({'sigma': lambdas, 'eid': eids})
+# plot noise_df
 from plotnine import *
 (
-  ggplot(noise_df, aes(x='n', y='eid')) 
-  + geom_line()
-  + geom_hline(yintercept=eid, linetype='dashed', color='red')
-  + geom_hline(yintercept=min(noise_df['eid']), linetype='dashed', color='blue')
-  + labs(x='Number of Noise Data Points added', y='Estimate Intrinsic Dimensionality')
+  ggplot(noise_df, aes(x='sigma', y='eid')) 
+  + geom_point()
+  + geom_smooth(method = "loess")
+  + labs(x='noise', y='Estimate Intrinsic Dimensionality')
 )
+
 ```, caption: [Noise generated and plotted])<4b_code>
+
+=== c)
+
+```python
+lambdas = np.array(range(1, 100, 1))*0.001
+eids = []
+np.random.seed(1)
+for lamb in lambdas:
+  noised_df = generate_random_numbers_from_these_functions(lamb = lamb)
+  eid = id_pettis(noised_df)
+  eids.append(eid)
+noise_df = pd.DataFrame({'sigma': lambdas, 'eid': eids})
+# plot noise_df
+from plotnine import *
+(
+  ggplot(noise_df, aes(x='sigma', y='eid')) 
+  + geom_point()
+  + geom_smooth(method = "loess")
+  + labs(x='noise', y='Estimate Intrinsic Dimensionality')
+)
+```
 
 == 5)
 === a)

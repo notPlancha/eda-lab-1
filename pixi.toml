@@ -6,6 +6,10 @@ platforms = ["win-64"]
 [tasks]
 ipynb_to_py = "jupyter nbconvert --to python"
 
+[tasks.report]
+cmd = "typst compile main.typ --font-path fonts/ report.pdf"
+cwd = "report"
+
 [dependencies]
 python = ">=3.13.2,<3.14"
 numpy = ">=2.2.3,<3"
