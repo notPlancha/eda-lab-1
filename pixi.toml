@@ -18,10 +18,10 @@ seaborn = ">=0.13.2,<0.14"
 plotnine = ">=0.14.5,<0.15"
 patchworklib = ">=0.6.3,<0.7" # doesnt work
 plotly = ">=6.0.0,<7"
+typst = ">=0.13.1,<0.14"
 openpyxl = ">=3.1.5,<4"
 factor-analyzer = ">=0.5.1,<0.6"
 kneed = ">=0.8.5,<0.9"
-typst = ">=0.13.1,<0.14"
 
 [pypi-dependencies]
 pyedakit = ">=0.1.4, <0.2"
