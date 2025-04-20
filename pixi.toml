@@ -1,9 +1,7 @@
 [project]
-authors = ["notPlancha <andre.plancha@hotmail.com>"]
 channels = ["conda-forge"]
-name = "eda"
+name = "eda-lab"
 platforms = ["win-64"]
-version = "0.1.0"
 
 [tasks]
 ipynb_to_py = "jupyter nbconvert --to python"
